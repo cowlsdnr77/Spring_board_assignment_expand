@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>간단 블로그</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="js/detail_create.js"></script>
+</head>
+<body>
+    <div class="ml-5 mt-5">
+        <a href="/"><h2>Board</h2></a>
+        <div class="form-group">
+            <label for="SelectedTitle">제목</label>
+            <input class="form-control col-sm-5" id="SelectedTitle"  placeholder="제목을 입력해주세요.">
+        </div>
+        <div class="form-group">
+            <label for="SelectedUsername">작성자</label>
+            <input class="form-control col-sm-5" id="SelectedUsername" placeholder="작성자를 입력해주세요.">
+        </div>
+        <div class="form-group">
+            <label for="SelectedContent">내용</label>
+            <textarea class="form-control col-sm-7" id="SelectedContent" rows="8" placeholder="내용을 입력해주세요."></textarea>
+        </div>
+        <button type="button" class="btn btn-outline-primary" onclick="createOneBoard()">글쓰기</button>
+    </div>
+</body>
+</html>
