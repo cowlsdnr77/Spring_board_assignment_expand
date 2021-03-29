@@ -1,5 +1,6 @@
 package com.sparta.myblog.model;
 
+import com.sparta.myblog.dto.BoardRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,18 +21,21 @@ public class Board extends Timestamped{
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    public Board(BoardRequestDto requestDto) {
+    @Column(nullable = false)
+    private Long userId;
+
+    public Board(BoardRequestDto requestDto, Long userId, String username) {
+        this.userId = userId;
         this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
+        this.username = username;
         this.content = requestDto.getContent();
     }
 
     public void update(BoardRequestDto requestDto) {
         this.title = requestDto.getTitle();
-        this.username = requestDto.getUsername();
         this.content = requestDto.getContent();
     }
 

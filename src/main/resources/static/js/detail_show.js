@@ -42,10 +42,6 @@ function showOneBoard(id) {
                                 <input class="form-control col-sm-5" id="SelectedTitle">
                             </div>
                             <div class="form-group" style="display: none">
-                                <label for="SelectedUsername">작성자</label>
-                                <input class="form-control col-sm-5" id="SelectedUsername">
-                            </div> 
-                            <div class="form-group" style="display: none">
                                 <label for="SelectedContent">내용</label>
                                 <textarea class="form-control col-sm-7" id="SelectedContent" rows="8"></textarea>
                             </div>
@@ -62,15 +58,12 @@ function showOneBoard(id) {
 //처음 수정하기 버튼 눌렀을때
 function changeToUpdateBoard(id) {
     let orgin_title = $('#title').text()
-    let orgin_username = $('#username').text()
     let orgin_content = $('#content').text().trim()
-
 
     $('#show_one_board').hide()
     $('#changeToUpdate').hide()
 
     $('#SelectedTitle').val(orgin_title)
-    $('#SelectedUsername').val(orgin_username)
     $('#SelectedContent').val(orgin_content)
 
     $('.form-group').show()
@@ -80,12 +73,10 @@ function changeToUpdateBoard(id) {
 //두번째 수정하기 버튼을 눌렀을때
 function UpdateOneBoard(id) {
     let title = $('#SelectedTitle').val()
-    let username = $('#SelectedUsername').val()
     let content = $('#SelectedContent').val()
 
     let boardDto = {
         "title": title,
-        "username": username,
         "content": content
     }
     $.ajax({

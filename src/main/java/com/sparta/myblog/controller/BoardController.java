@@ -2,10 +2,12 @@ package com.sparta.myblog.controller;
 
 
 import com.sparta.myblog.model.Board;
-import com.sparta.myblog.model.BoardRepository;
-import com.sparta.myblog.model.BoardRequestDto;
+import com.sparta.myblog.repository.BoardRepository;
+import com.sparta.myblog.dto.BoardRequestDto;
+import com.sparta.myblog.security.UserDetailsImpl;
 import com.sparta.myblog.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +34,10 @@ public class BoardController {
 
     // 게시글 등록
     @PostMapping("/api/boards")
-    public Board createBoard(@RequestBody BoardRequestDto requestDto) {
-        Board board = new Board(requestDto);
+    public Board createBoard(@RequestBody BoardRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Long userId = userDetails.getUser().getId();
+        String username = userDetails.getUser().getUsername();
+        Board board = new Board(requestDto,userId,username);
         return boardRepository.save(board);
     }
 

@@ -2,8 +2,8 @@ package com.sparta.myblog.service;
 
 
 import com.sparta.myblog.model.Board;
-import com.sparta.myblog.model.BoardRepository;
-import com.sparta.myblog.model.BoardRequestDto;
+import com.sparta.myblog.repository.BoardRepository;
+import com.sparta.myblog.dto.BoardRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+
+    @Transactional
+    public Board createBoard(BoardRequestDto requestDto, Long userId, String username) {
+        Board board = new Board(requestDto, userId, username);
+        boardRepository.save(board);
+        return board;
+    }
 
     @Transactional
     public Long update(Long id, BoardRequestDto requestDto) {

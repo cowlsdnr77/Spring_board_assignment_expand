@@ -1,12 +1,10 @@
 //게시물 생성하기
 function createOneBoard() {
     let title = $('#SelectedTitle').val()
-    let username = $('#SelectedUsername').val()
     let content = $('#SelectedContent').val()
 
     let boardDto = {
         "title": title,
-        "username": username,
         "content": content
     }
     $.ajax({
