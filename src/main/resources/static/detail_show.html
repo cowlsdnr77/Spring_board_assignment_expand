@@ -49,9 +49,13 @@
             <label for="SelectedContent">내용</label>
             <textarea class="form-control col-sm-7" id="SelectedContent" rows="8"></textarea>
         </div>
-        <button type="button" class="btn btn-outline-primary mr-2" id="changeToUpdate" onClick="changeToUpdateBoard(${response.id})">수정하기</button>
-        <button type="button" class="btn btn-outline-primary mr-2" id="realUpdate" style="display: none" onClick="UpdateOneBoard(${response.id})">수정하기</button>
-        <button type="button" class="btn btn-outline-primary" onclick="deleteOneBoard(${response.id})">삭제하기</button>
+        <div th:if="${#authorization.expr('isAuthenticated()')}">
+            <div th:if="${present_userId.equals(board.userId)}">
+                <button type="button" class="btn btn-outline-primary mr-2" id="changeToUpdate" th:onclick="|javascript:changeToUpdateBoard('${board.id}')|">수정하기</button>
+                <button type="button" class="btn btn-outline-primary mr-2" id="realUpdate" style="display: none" th:onclick="|javascript:UpdateOneBoard('${board.id}')|">수정하기</button>
+                <button type="button" class="btn btn-outline-primary" th:onclick="|javascript:deleteOneBoard('${board.id}')|">삭제하기</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

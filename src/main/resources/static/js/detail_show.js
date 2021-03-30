@@ -72,6 +72,7 @@ function changeToUpdateBoard(id) {
 
 //두번째 수정하기 버튼을 눌렀을때
 function UpdateOneBoard(id) {
+    let selected_id = parseInt(id)
     let title = $('#SelectedTitle').val()
     let content = $('#SelectedContent').val()
 
@@ -81,7 +82,7 @@ function UpdateOneBoard(id) {
     }
     $.ajax({
         type: "PUT",
-        url: `/api/boards/${id}`,
+        url: `/api/boards/${selected_id}`,
         data: JSON.stringify(boardDto),
         contentType: "application/json",
         success: function (response){
@@ -92,10 +93,10 @@ function UpdateOneBoard(id) {
 }
 //삭제하기 버튼 눌렀을때
 function deleteOneBoard(id) {
-
+    let selected_id = parseInt(id)
     $.ajax({
         type: "DELETE",
-        url: `/api/boards/${id}`,
+        url: `/api/boards/${selected_id}`,
         success: function (response){
             alert("게시물이 삭제되었습니다.")
             window.location.href = "/"

@@ -35,11 +35,14 @@ public class BoardController {
 //    }
 
     @GetMapping("/boards")
-    public String getOneBoard(@RequestParam(value = "id") Long id, Model model) {
+    public String getOneBoard(@RequestParam(value = "id") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         Optional<Board> board = boardRepository.findById(id);
         board.ifPresent(selectBoard -> {
             model.addAttribute("board", selectBoard);
         });
+        if(userDetails != null) {
+            model.addAttribute("present_userId", userDetails.getUser().getId());
+        }
         return "detail_show";
     }
 
