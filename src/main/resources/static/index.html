@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"+
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -23,9 +23,15 @@
 <div class="container ml-5 mt-5">
     <a href="/"><h2>Board</h2></a>
     <a class="btn btn-outline-primary" href="detail_create.html" role="button">새 게시물</a>
-    <a id="login-text" href="/user/login">로그인</a>
-    <a id="signup-text" href="/user/signup">회원가입</a>
-    <a id="logout-text" href="/user/logout">로그아웃</a>
+    <div th:if="${#authorization.expr('isAuthenticated()')}">
+        반갑습니다. <span sec:authentication="name">name</span>님!
+        <a id="logout-text" href="/user/logout">로그아웃</a>
+    </div>
+    <div th:unless="${#authorization.expr('isAuthenticated()')}">
+        <a id="login-text" href="/user/login">로그인</a>
+        <a id="signup-text" href="/user/signup">회원가입</a>
+    </div>
+
     <Table class="table table-striped">
         <thead>
         <tr>

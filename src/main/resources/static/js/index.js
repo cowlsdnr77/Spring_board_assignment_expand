@@ -2,7 +2,7 @@ $(document).ready(function () {
     showBoard();
 })
 
-//index.html 에 board 목록 보여줌
+//index.html 에 board 목록 보여줌 + (로그인 했으면 회원이름, 비로그인이면 로그인,회원가입 a태그)
 function showBoard() {
     $.ajax({
         type: "GET",
