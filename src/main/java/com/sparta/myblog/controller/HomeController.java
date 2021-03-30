@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    @GetMapping("/") public String home(Model model) {
+    @GetMapping("/") public String home() {
         return "index";
+    }
+    @GetMapping("board/create") public String show_create_board() {
+        return "detail_create";
     }
 }

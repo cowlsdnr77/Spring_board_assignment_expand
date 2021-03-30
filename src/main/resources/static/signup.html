@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,6 +14,13 @@
 <body>
 <div id="login-form">
     <div id="login-title">Sign up Select Shop</div>
+
+    <div th:if="${#authorization.expr('isAuthenticated()')}">
+        <script>
+            alert("이미 로그인 되어있습니다.")
+            location.href = "/";
+        </script>
+    </div>
 
     <form action="/user/signup" method="post">
         <div class="login-id-label">닉네임</div>

@@ -22,12 +22,13 @@
 <body>
 <div class="container ml-5 mt-5">
     <a href="/"><h2>Board</h2></a>
-    <a class="btn btn-outline-primary" href="detail_create.html" role="button">새 게시물</a>
     <div th:if="${#authorization.expr('isAuthenticated()')}">
+        <a class="btn btn-outline-primary" href="board/create" role="button">새 게시글</a>
         반갑습니다. <span sec:authentication="name">name</span>님!
         <a id="logout-text" href="/user/logout">로그아웃</a>
     </div>
     <div th:unless="${#authorization.expr('isAuthenticated()')}">
+        <a class="btn btn-outline-primary" href="/user/login" role="button" onclick="alert('로그인이 필요합니다.')">새 게시글</a>
         <a id="login-text" href="/user/login">로그인</a>
         <a id="signup-text" href="/user/signup">회원가입</a>
     </div>
