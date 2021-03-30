@@ -1,7 +1,7 @@
-$(document).ready(function () {
-    let selected_id = parseInt(location.href.substr(location.href.lastIndexOf('=') + 1)) //url의 id=?에서 ? 값을 id로 가져옴
-    showOneBoard(selected_id);
-})
+// $(document).ready(function () {
+//     let selected_id = parseInt(location.href.substr(location.href.lastIndexOf('=') + 1)) //url의 id=?에서 ? 값을 id로 가져옴
+//     showOneBoard(selected_id);
+// })
 
 // 목록에서 하나 클릭했을때 상세 페이지로 이동
 function showOneBoard(id) {

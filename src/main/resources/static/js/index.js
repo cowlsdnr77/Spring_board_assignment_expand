@@ -25,7 +25,7 @@ function addHTML(boardItem) {
     if (boardItem) {
         let timeArray = boardItem.modifiedAt.split('T')
         let time = timeArray[0] + " " + timeArray[1].substr(0,5)
-        return `<tr onClick="location.href='detail_show.html?id=${boardItem.id}'" style="cursor:pointer">    
+        return `<tr onClick="location.href='/boards?id=${boardItem.id}'" style="cursor:pointer">    
                     <td>${boardItem.title}</td>
                     <td>${boardItem.username}</td>
                     <td>${time}</td>

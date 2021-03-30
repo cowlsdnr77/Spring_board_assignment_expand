@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,37 @@
 </head>
 <body>
     <div class="ml-5 mt-5" id="one-board">
+        <a href="/"><h2>Board</h2></a>
 
+        <div id="show_one_board">
+            <dt class="col-sm-3">제목</dt>
+            <dd class="col-sm-9" id="title" th:text="${board.title}">${response.title}</dd>
+
+            <dt class="col-sm-3">작성자</dt>
+            <dd class="col-sm-9" id="username" th:text="${board.username}">${response.username}</dd>
+
+            <dt class="col-sm-3">작성일자</dt>
+            <dd class="col-sm-9" th:text="${#temporals.format(board.modifiedAt,'yyyy-MM-dd HH:mm')}">${time}</dd>
+
+            <dt class="col-sm-3">내용</dt>
+            <dd class="col-sm-9">
+                <p id="content" th:text="${board.content}">
+                    ${response.content}
+                </p>
+            </dd>
+        </div>
+
+        <div class="form-group" style="display: none" >
+            <label for="SelectedTitle">제목</label>
+            <input class="form-control col-sm-5" id="SelectedTitle">
+        </div>
+        <div class="form-group" style="display: none">
+            <label for="SelectedContent">내용</label>
+            <textarea class="form-control col-sm-7" id="SelectedContent" rows="8"></textarea>
+        </div>
+        <button type="button" class="btn btn-outline-primary mr-2" id="changeToUpdate" onClick="changeToUpdateBoard(${response.id})">수정하기</button>
+        <button type="button" class="btn btn-outline-primary mr-2" id="realUpdate" style="display: none" onClick="UpdateOneBoard(${response.id})">수정하기</button>
+        <button type="button" class="btn btn-outline-primary" onclick="deleteOneBoard(${response.id})">삭제하기</button>
     </div>
 </body>
 </html>
