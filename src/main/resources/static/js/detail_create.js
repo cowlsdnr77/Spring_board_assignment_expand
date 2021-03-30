@@ -1,10 +1,3 @@
-function loginReview() {
-    if($('#login_auth').val() != null) {
-        alert("로그인이 필요합니다.")
-        location.href = "/user/login";
-    }
-}
-
 //게시물 생성하기
 function createOneBoard() {
     let title = $('#SelectedTitle').val()

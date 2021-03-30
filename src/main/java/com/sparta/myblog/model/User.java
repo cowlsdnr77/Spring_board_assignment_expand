@@ -25,6 +25,15 @@ public class User extends Timestamped {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = true)
+    private Long kakaoId;
+
+    public User(String username, String password, Long kakaoId) {
+        this.username = username;
+        this.password = password;
+        this.kakaoId = kakaoId;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

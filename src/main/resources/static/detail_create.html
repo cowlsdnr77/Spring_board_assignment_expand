@@ -17,27 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script>
-        function createOneBoard() {
-            let title = $('#SelectedTitle').val()
-            let content = $('#SelectedContent').val()
-
-            let boardDto = {
-                "title": title,
-                "content": content
-            }
-            $.ajax({
-                type: "POST",
-                url: "/api/boards",
-                data: JSON.stringify(boardDto),
-                contentType: "application/json",
-                success: function(response) {
-                    alert("게시글이 작성되었습니다.")
-                    window.location.href = "/"
-                }
-            })
-        }
-    </script>
+    <script src="../js/detail_create.js"></script>
 </head>
 <body>
     <div class="ml-5 mt-5">
