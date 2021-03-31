@@ -76,20 +76,26 @@ function UpdateOneBoard(id) {
     let title = $('#SelectedTitle').val()
     let content = $('#SelectedContent').val()
 
-    let boardDto = {
-        "title": title,
-        "content": content
-    }
-    $.ajax({
-        type: "PUT",
-        url: `/api/boards/${selected_id}`,
-        data: JSON.stringify(boardDto),
-        contentType: "application/json",
-        success: function (response){
-            alert("게시물이 수정되었습니다.")
-            window.location.href = "/"
+    if(title.replace(/\s| /gi,"").length === 0) {
+        alert("게시글 제목을 입력해주세요.")
+    } else if (content.replace(/\s| /gi,"").length === 0){
+        alert("게시글 내용을 입력해주세요.")
+    } else {
+        let boardDto = {
+            "title": title,
+            "content": content
         }
-    })
+        $.ajax({
+            type: "PUT",
+            url: `/api/boards/${selected_id}`,
+            data: JSON.stringify(boardDto),
+            contentType: "application/json",
+            success: function (response){
+                alert("게시물이 수정되었습니다.")
+                window.location.href = "/"
+            }
+        })
+    }
 }
 //삭제하기 버튼 눌렀을때
 function deleteOneBoard(id) {
@@ -112,7 +118,7 @@ function redirectToLogin() {
 function createOneComment(boardId) {
     let selected_id = parseInt(boardId)
     let content = $('#comment-write').val()
-    if (content === "") {
+    if (content.replace(/\s| /gi,"").length === 0) {
         alert("댓글 내용을 입력해주세요.")
     } else {
         let commentDto = {
@@ -125,6 +131,32 @@ function createOneComment(boardId) {
             contentType: "application/json",
             success: function(response) {
                 alert("댓글이 작성되었습니다.")
+                window.location.href = `/boards?id=${boardId}`
+            }
+        })
+    }
+}
+
+function clickUpdateCommentBtn(commentId) {
+    $(`.comment_${commentId}`).hide()
+    $(`.comment_save_${commentId}`).show()
+}
+
+function updateOneComment(commentId,boardId) {
+    let content = $(`#comment_update_${commentId}`).val()
+    if( content.replace(/\s| /gi,"").length === 0) { //미입력 또는 공뱁 입력 방지
+        alert("댓글 내용을 입력해주세요.")
+    } else{
+        let commentDto = {
+            "content": content
+        }
+        $.ajax({
+            type: "PUT",
+            url: `/api/comments/${commentId}`,
+            data: JSON.stringify(commentDto),
+            contentType: "application/json",
+            success: function (response){
+                alert("댓글이 수정되었습니다.")
                 window.location.href = `/boards?id=${boardId}`
             }
         })

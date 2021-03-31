@@ -70,41 +70,24 @@
                 <button class="btn btn-outline-primary">댓글 쓰기</button>
             </div>
         </div>
-        <Table class="table table-striped">
-            <thead>
-            <tr>
-                <th></th>
-            </tr>
-            </thead>
+        <Table class="table">
             <tbody id="board-container">
-                <tr th:each="comment : ${comments}">
-                    <td th:text="${comment.username}">채진욱</td>
-                    <td th:text="${comment.content}">할수있다!!</td>
-                    <td th:text="${#temporals.format(comment.modifiedAt,'yyyy-MM-dd HH:mm')}">2021-03-31 13:40</td>
+                <tr th:each="comment : ${comments}" >
+                    <td th:text="${comment.username}" th:classappend="|comment_${comment.id}|" style="font-weight: bold">채진욱</td>
+                    <td th:text="${comment.content}" th:classappend="|comment_${comment.id}|">할수있다!!</td>
+                    <td th:text="${#temporals.format(comment.modifiedAt,'yyyy-MM-dd HH:mm')}" th:classappend="|comment_${comment.id}|">2021-03-31 13:40</td>
+                    <td> <textarea th:text="${comment.content}" th:id="|comment_update_${comment.id}|" th:classappend="|comment_save_${comment.id}|" rows="3" style="width: 100%; display: none" ></textarea></td>
                     <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_update" class="btn btn-outline-primary" value="수정">
+                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_update" class="btn btn-outline-primary" th:classappend="|comment_${comment.id}|" th:onclick="|javascript:clickUpdateCommentBtn('${comment.id}')|" value="수정">
                     </td>
                     <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_save" class="btn btn-outline-primary" style="display: none" value="저장">
+                        <input th:if="${present_userId.equals(comment.userId)}" type="button" class="btn btn-outline-primary" th:classappend="|comment_save_${comment.id}|" style="display: none" th:onclick="|javascript:updateOneComment('${comment.id}','${board.id}')|" value="저장">
                     </td>
                     <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_delete" class="btn btn-outline-primary" th:onclick="|javascript:deleteOneComment('${comment.id}','${board.id}')|" value="삭제">
-                    </td>
-                </tr>
-                <tr th:each="comment : ${comments}">
-                    <td th:text="${comment.username}">채진욱</td>
-                    <td th:text="${comment.content}">할수있다!!</td>
-                    <td th:text="${#temporals.format(comment.modifiedAt,'yyyy-MM-dd HH:mm')}">2021-03-31 13:40</td>
-                    <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_update" class="btn btn-outline-primary" value="수정">
-                    </td>
-                    <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_save" class="btn btn-outline-primary" style="display: none" value="저장">
-                    </td>
-                    <td th:if="${#authorization.expr('isAuthenticated()')}">
-                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_delete" class="btn btn-outline-primary" th:onclick="|javascript:deleteOneComment('${comment.id}','${board.id}')|" value="삭제">
+                        <input th:if="${present_userId.equals(comment.userId)}" type="button" id="comment_delete" class="btn btn-outline-primary" th:classappend="|comment_${comment.id}|" th:onclick="|javascript:deleteOneComment('${comment.id}','${board.id}')|" value="삭제">
                     </td>
                 </tr>
+
             </tbody>
         </Table>
     </div>
