@@ -112,29 +112,35 @@ function redirectToLogin() {
 function createOneComment(boardId) {
     let selected_id = parseInt(boardId)
     let content = $('#comment-write').val()
-    let commentDto = {
-        "content": content
-    }
-    $.ajax({
-        type: "POST",
-        url: `/api/comments?boardId=${selected_id}`,
-        data: JSON.stringify(commentDto),
-        contentType: "application/json",
-        success: function(response) {
-            alert("댓글이 작성되었습니다.")
-            window.location.href = "/"
+    if (content === "") {
+        alert("댓글 내용을 입력해주세요.")
+    } else {
+        let commentDto = {
+            "content": content
         }
-    })
+        $.ajax({
+            type: "POST",
+            url: `/api/comments?boardId=${selected_id}`,
+            data: JSON.stringify(commentDto),
+            contentType: "application/json",
+            success: function(response) {
+                alert("댓글이 작성되었습니다.")
+                window.location.href = `/boards?id=${boardId}`
+            }
+        })
+    }
 }
 
-function deleteOneComment(boardId) {
-    let selected_id = parseInt(boardId)
-    $.ajax({
-        type: "DELETE",
-        url: `/api/comments?boardId=${selected_id}`,
-        success: function (response){
-            alert("게시물이 삭제되었습니다.")
-            window.location.href = "/"
-        }
-    })
+function deleteOneComment(commentId,boardId) {
+    let selected_id = parseInt(commentId)
+    if (confirm("정말로 삭제하시겠습니까?") === true) {
+        $.ajax({
+            type: "DELETE",
+            url: `/api/comments/${selected_id}`,
+            success: function (response){
+                alert("댓글이 삭제되었습니다.")
+                window.location.href = `/boards?id=${boardId}`
+            }
+        })
+    }
 }
