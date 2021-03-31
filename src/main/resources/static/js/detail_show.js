@@ -103,3 +103,38 @@ function deleteOneBoard(id) {
         }
     })
 }
+
+function redirectToLogin() {
+    alert("로그인이 필요합니다.")
+    window.location.href = "/user/login"
+}
+
+function createOneComment(boardId) {
+    let selected_id = parseInt(boardId)
+    let content = $('#comment-write').val()
+    let commentDto = {
+        "content": content
+    }
+    $.ajax({
+        type: "POST",
+        url: `/api/comments?boardId=${selected_id}`,
+        data: JSON.stringify(commentDto),
+        contentType: "application/json",
+        success: function(response) {
+            alert("댓글이 작성되었습니다.")
+            window.location.href = "/"
+        }
+    })
+}
+
+function deleteOneComment(boardId) {
+    let selected_id = parseInt(boardId)
+    $.ajax({
+        type: "DELETE",
+        url: `/api/comments?boardId=${selected_id}`,
+        success: function (response){
+            alert("게시물이 삭제되었습니다.")
+            window.location.href = "/"
+        }
+    })
+}
