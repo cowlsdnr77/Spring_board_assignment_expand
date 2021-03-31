@@ -1,10 +1,12 @@
 package com.sparta.myblog.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sparta.myblog.dto.BoardRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Entity
@@ -26,6 +28,10 @@ public class Board extends Timestamped{
 
     @Column(nullable = false)
     private Long userId;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE) // 영속성 전이 (삭제)
+    private List<Comment> comments;
 
     public Board(BoardRequestDto requestDto, Long userId, String username) {
         this.userId = userId;

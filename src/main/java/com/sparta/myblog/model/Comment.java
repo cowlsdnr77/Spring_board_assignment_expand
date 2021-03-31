@@ -1,5 +1,6 @@
 package com.sparta.myblog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sparta.myblog.dto.BoardRequestDto;
 import com.sparta.myblog.dto.CommentRequestDto;
 import lombok.Getter;
@@ -24,12 +25,14 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private Long userId;
 
-    @Column(nullable = false)
-    private Long boardId;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(nullable = false) //name 설정 안하면 알아서 BOARD_ID로 DB에 반영
+    private Board board;
 
-    public Comment(CommentRequestDto requestDto, Long userId, Long boardId, String username) {
+    public Comment(CommentRequestDto requestDto, Long userId, Board board, String username) {
         this.userId = userId;
-        this.boardId = boardId;
+        this.board = board;
         this.username = username;
         this.content = requestDto.getContent();
     }

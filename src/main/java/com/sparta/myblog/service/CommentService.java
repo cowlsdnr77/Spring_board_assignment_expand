@@ -1,6 +1,5 @@
 package com.sparta.myblog.service;
 
-import com.sparta.myblog.dto.BoardRequestDto;
 import com.sparta.myblog.dto.CommentRequestDto;
 import com.sparta.myblog.model.Board;
 import com.sparta.myblog.model.Comment;
@@ -9,10 +8,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+
+    public List<Comment> getComments(Board board) {
+        return commentRepository.findAllByBoardOrderByModifiedAtDesc(board);
+    }
 
     @Transactional
     public Long update(Long id, CommentRequestDto requestDto) {

@@ -44,11 +44,15 @@ public class BoardController {
     //게시물 상세 조회(게시글 + 댓글)
     @GetMapping("/boards")
     public String getOneBoard(@RequestParam(value = "id") Long id, @AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
-        Optional<Board> board = boardRepository.findById(id);
-        board.ifPresent(selectBoard -> {
-            model.addAttribute("board", selectBoard);
-        });
-        List<Comment> comments = commentRepository.findAllByBoardIdOrderByModifiedAtDesc(id);
+//        Optional<Board> board = boardRepository.findById(id);
+//        board.ifPresent(selectBoard -> {
+//            model.addAttribute("board", selectBoard);
+//        });
+        Board board = boardRepository.findById(id).orElseThrow(
+                () -> new NullPointerException("해당 게시글이 존재하지 않습니다.")
+        );
+        model.addAttribute("board", board);
+        List<Comment> comments = commentRepository.findAllByBoardOrderByModifiedAtDesc(board);
         model.addAttribute("comments", comments);
         if (userDetails != null) {
             model.addAttribute("present_userId", userDetails.getUser().getId());
@@ -84,9 +88,13 @@ public class BoardController {
     @PostMapping("/api/comments")
     public @ResponseBody
     Comment createComment(@RequestParam(value = "boardId") Long boardId, @RequestBody CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                () -> new NullPointerException("해당 게시글이 존재하지 않습니다.")
+        );
         Long userId = userDetails.getUser().getId();
         String username = userDetails.getUser().getUsername();
-        Comment comment = new Comment(requestDto,userId,boardId,username);
+        Comment comment = new Comment(requestDto,userId,board,username);
+        board.getComments().add(comment);
         return commentRepository.save(comment);
     }
 
