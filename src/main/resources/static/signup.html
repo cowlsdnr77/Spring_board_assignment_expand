@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="login-form">
-    <div id="login-title">Sign up Select Shop</div>
+    <div id="login-title">스프링 게시판 회원가입</div>
 
     <div th:if="${#authorization.expr('isAuthenticated()')}">
         <script>
@@ -33,7 +33,7 @@
         <input type="password" name="password_again" class="login-input-box">
 
         <div th:if="${error}" th:text="${error}" class="alert alert-danger" role="alert"></div>
-        <button id="login-id-submit">회원 가입</button>
+        <button id="login-id-submit">가입하기</button>
     </form>
 </div>
 </body>

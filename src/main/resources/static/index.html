@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>간단 블로그</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>[스프링 게시판]</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container ml-5 mt-5">
-    <a href="/"><h2>Board</h2></a>
+    <a href="/"><h2>스프링 게시판</h2></a>
     <div th:if="${#authorization.expr('isAuthenticated()')}">
         <a class="btn btn-outline-primary" href="board/create" role="button">새 게시글</a>
         반갑습니다. <span sec:authentication="name">name</span>님!
@@ -36,9 +36,9 @@
     <Table class="table table-striped">
         <thead>
         <tr>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성날짜</th>
+            <th style="font-weight: bold">제목</th>
+            <th style="font-weight: bold">작성자</th>
+            <th style="font-weight: bold">작성날짜</th>
         </tr>
         </thead>
         <tbody id="board-container">
